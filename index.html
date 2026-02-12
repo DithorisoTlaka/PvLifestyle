@@ -96,11 +96,11 @@
             box-shadow: 0 10px 20px rgba(197, 160, 40, 0.2);
         }
         .btn-gold:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(197, 160, 40, 0.3);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(197, 160, 40, 0.4);
             background-color: #b08d1e;
         }
-        /* --- 5. HERO SECTION (CLEAR VISIBILITY) --- */
+        /* --- 5. HERO SECTION --- */
         .hero {
             height: 100vh;
             display: flex;
@@ -108,37 +108,20 @@
             justify-content: center;
             text-align: center;
             position: relative;
-            background: url('https://i.postimg.cc/tR6tT7L7/pvheroimage.jpg') center/cover no-repeat fixed;
+            /* High resolution image from Unsplash */
+            background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat fixed;
             color: #ffffff;
             padding: 0 20px;
         }
-        /* Dark overlay for text clarity */
         .hero::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3), rgba(0,0,0,0.6));
+            background: rgba(0, 0, 0, 0.3);
         }
         .hero-content {
             position: relative;
             z-index: 2;
-        }
-        .hero-content .section-tag {
-            font-size: 0.8rem;
-        }
-        .hero-content h1 {
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            line-height: 1.1;
-            margin-bottom: 25px;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.4); /* Extra clarity */
-        }
-        .hero-content p {
-            font-size: 1rem;
-            font-weight: 400;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            opacity: 0.95;
-            letter-spacing: 0.5px;
         }
         /* --- 6. CONTENT SECTIONS --- */
         section { padding: 120px 10%; }
@@ -246,9 +229,9 @@
         }
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero-content h1 { font-size: 3rem; }
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
             section { padding: 80px 5%; }
+            .hero { background-attachment: scroll; } /* Improved mobile performance */
         }
     </style>
 </head>
@@ -263,16 +246,13 @@
         </nav>
         <a href="#contact" class="btn-pill btn-gold" style="padding: 10px 25px;">Reserve</a>
     </header>
+
     <section class="hero" id="home">
         <div class="hero-content">
-            <span class="section-tag" style="color: #fff; opacity: 0.8;">Fine Dining & Exclusive Bar</span>
-            <h1 class="reveal">Exceptional Taste.Refined Atmosphere.</h1>
-            <p class="reveal">Join us for an intimate culinary journey featuring the freshest flavors and rarest vintages.</p>
-            <div class="reveal">
-                <a href="#about" class="btn-pill btn-gold">Explore the Experience</a>
-            </div>
+            <a href="#contact" class="btn-pill btn-gold" style="font-size: 1rem; padding: 20px 50px;">Get In Touch</a>
         </div>
     </section>
+
     <section id="about">
         <div class="grid-layout reveal">
             <div class="image-box">
@@ -285,10 +265,11 @@
                 <br>
                 <p>We boast a wide selection of Spirits, Whiskey, Vodka, and Cognac, making us the premier destination for connoisseurs in Mokopane.</p>
                 <br>
-                <a href="#menu" class="btn-pill btn-gold" style="background: transparent; border: 2px solid var(--primary-gold); color: var(--primary-gold);">View Menu</a>
+                <a href="menu.html" class="btn-pill btn-gold" style="background: transparent; border: 2px solid var(--primary-gold); color: var(--primary-gold);">View Menu</a>
             </div>
         </div>
     </section>
+
     <section style="background-color: var(--bg-section);">
         <div class="grid-layout reveal">
             <div class="text-content">
@@ -307,6 +288,7 @@
             </div>
         </div>
     </section>
+
     <footer id="contact">
         <div class="footer-grid">
             <div class="footer-col">
@@ -349,6 +331,7 @@
             <p>&copy; 2026 PV Lifestyle Restaurant & Bar. All Rights Reserved. | Designed by Ituzatech.</p>
         </div>
     </footer>
+
     <script>
         // Reveal Animations
         const observer = new IntersectionObserver((entries) => {
@@ -357,6 +340,7 @@
             });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        
         // Nav Scroll Effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('.nav-container');
@@ -368,19 +352,6 @@
                 nav.style.padding = "12px 35px";
             }
         });
-        // Typing Effect for Hero Heading
-        const heading = document.querySelector('.hero-content h1');
-        const text = heading.innerHTML;
-        heading.innerHTML = '';
-        let i = 0;
-        function typeWriter() {
-            if (i < text.length) {
-                heading.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 50);
-            }
-        }
-        typeWriter();
     </script>
 </body>
 </html>
