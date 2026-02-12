@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu | PV Lifestyle</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- 1. CORE DESIGN VARIABLES --- */
+        :root {
+            --primary-gold: #C5A028;
+            --dark-text: #1a1a1a;
+            --light-text: #555555;
+            --bg-light: #ffffff;
+            --bg-section: #f9f9f9;
+            --footer-bg: #111111;
+            --glass-white: rgba(255, 255, 255, 0.85);
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --radius-pill: 50px;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* --- 2. RESET & BASE --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--dark-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- 3. NAVIGATION (PILL GLASSMORPHISM) --- */
+        .nav-container {
+            position: fixed;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 35px;
+            background: var(--glass-white);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow);
+        }
+        .logo { font-size: 1.4rem; color: var(--dark-text); font-weight: 800; }
+        .logo span { color: var(--primary-gold); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .nav-links a:hover { color: var(--primary-gold); }
+
+        /* --- 4. HERO SECTION (MENU) --- */
+        .menu-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1920&q=80') center/cover;
+            color: #fff;
+            padding-top: 80px;
+        }
+        .menu-hero h1 { font-size: 4rem; margin-bottom: 10px; }
+
+        /* --- 5. MENU GRID & CARDS --- */
+        .menu-section { padding: 80px 10%; }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .menu-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid #eee;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .menu-card-img {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .menu-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+
+        .menu-card:hover .menu-card-img img {
+            transform: scale(1.1);
+        }
+
+        .menu-card-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .menu-card-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .menu-card-info span {
+            color: var(--primary-gold);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* --- 6. MODAL SYSTEM --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            display: none; /* Hidden by default */
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 900px;
+            width: 100%;
+            border-radius: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+            position: relative;
+            animation: modalFadeIn 0.5s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-img {
+            height: 100%;
+            min-height: 400px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .modal-details {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .modal-price {
+            font-size: 2rem;
+            color: var(--primary-gold);
+            font-family: 'Playfair Display', serif;
+            margin: 20px 0;
+            display: block;
+        }
+
+        .btn-pill {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            background: var(--primary-gold);
+            color: white;
+        }
+
+        /* --- 7. FOOTER (AS REQUESTED) --- */
+        footer {
+            background-color: var(--footer-bg);
+            color: #ffffff;
+            padding: 100px 10% 40px;
+            font-size: 0.95rem;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        .footer-col h4 { color: #fff; margin-bottom: 30px; position: relative; }
+        .footer-col h4::after { content: ''; position: absolute; left: 0; bottom: -10px; width: 30px; height: 2px; background: var(--primary-gold); }
+        .footer-col p { color: #aaa; margin-bottom: 20px; }
+        .footer-links a { color: #aaa; display: block; margin-bottom: 10px; }
+        .footer-links a:hover { color: var(--primary-gold); }
+        .footer-bottom { border-top: 1px solid #222; padding-top: 40px; text-align: center; color: #666; }
+
+        /* --- 8. RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .modal-content { grid-template-columns: 1fr; }
+            .modal-img { height: 250px; min-height: 250px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="nav-container">
+        <div class="logo">PV <span>LIFESTYLE</span></div>
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="#">About</a>
+            <a href="#menu">Menu</a>
+            <a href="#">Gallery</a>
+        </nav>
+        <a href="#" class="btn-pill" style="padding: 10px 25px;">Reserve</a>
+    </header>
+
+    <div class="menu-hero">
+        <div class="hero-content">
+            <h1>Our Menu</h1>
+            <p>A Curated Selection of Fine Dining & Exquisite Spirits</p>
+        </div>
+    </div>
+
+    <section class="menu-section" id="menu">
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openModal('Prime Rib-Eye', 'Aged for 28 days, served with truffle butter and seasonal roasted vegetables.', 'R 285.00', 'https://images.unsplash.com/photo-1546241072-48010ad28c2c?auto=format&fit=crop&w=600&q=80')">
+                <div class="menu-card-img">
+                    <img src="https://images.unsplash.com/photo-1546241072-48010ad28c2c?auto=format&fit=crop&w=600&q=80" alt="Menu Item">
+                </div>
+                <div class="menu-card-info">
+                    <h3>Prime Rib-Eye</h3>
+                    <span>R 285.00</span>
+                </div>
+            </div>
+
+            <div class="menu-card" onclick="openModal('Signature Seafood Platter', 'Freshly caught prawns, calamari, and line fish with lemon-garlic butter.', 'R 420.00', 'https://images.unsplash.com/photo-1551489186-cf8726f514f8?auto=format&fit=crop&w=600&q=80')">
+                <div class="menu-card-img">
+                    <img src="https://images.unsplash.com/photo-1551489186-cf8726f514f8?auto=format&fit=crop&w=600&q=80" alt="Menu Item">
+                </div>
+                <div class="menu-card-info">
+                    <h3>Seafood Platter</h3>
+                    <span>R 420.00</span>
+                </div>
+            </div>
+
+            <div class="menu-card" onclick="openModal('Hennessy V.S.O.P', 'A balanced cognac, expressing 200 years of Hennessy\'s know-how.', 'R 1,200.00', 'https://images.unsplash.com/photo-1599021419847-d8a7a6aba5b4?auto=format&fit=crop&w=600&q=80')">
+                <div class="menu-card-img">
+                    <img src="https://images.unsplash.com/photo-1599021419847-d8a7a6aba5b4?auto=format&fit=crop&w=600&q=80" alt="Menu Item">
+                </div>
+                <div class="menu-card-info">
+                    <h3>Hennessy V.S.O.P</h3>
+                    <span>R 1,200.00</span>
+                </div>
+            </div>
+
+            <div class="menu-card" onclick="openModal('Chillas Meat Board', 'Perfect for groups. Brisket, wings, and boerewors with traditional pap and chakalaka.', 'R 550.00', 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80')">
+                <div class="menu-card-img">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" alt="Menu Item">
+                </div>
+                <div class="menu-card-info">
+                    <h3>Chillas Meat Board</h3>
+                    <span>R 550.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close-modal" onclick="closeModal(null)">&times;</span>
+            <div class="modal-img" id="modalImg"></div>
+            <div class="modal-details">
+                <h2 id="modalTitle">Item Name</h2>
+                <p id="modalDesc">Detailed description goes here.</p>
+                <span class="modal-price" id="modalPrice">R 0.00</span>
+                <button class="btn-pill">Add to Order</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="color: #fff; margin-bottom: 25px;">PV <span>LIFESTYLE</span></div>
+                <p>Elevating the standard of fine dining in Mokopane. We combine culinary excellence with a sophisticated atmosphere.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <div class="footer-links">
+                    <a href="#">Home</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Our Menu</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fas fa-map-marker-alt" style="color: var(--primary-gold);"></i> 67 Van Heerden Str. Mokopane</p>
+                <p><i class="fas fa-phone" style="color: var(--primary-gold);"></i> 015 000 6300</p>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <div style="display: flex; gap: 10px;">
+                    <input type="email" placeholder="Email Address" style="padding: 12px 20px; border-radius: 25px; border: none; background: #222; color: #fff; width: 100%;">
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PV Lifestyle. Designed by Ituzatech.</p>
+        </div>
+    </footer>
+
+    <script>
+        function openModal(title, desc, price, img) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('modalPrice').innerText = price;
+            document.getElementById('modalImg').style.backgroundImage = `url('${img}')`;
+            document.getElementById('modalOverlay').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Stop scrolling
+        }
+
+        function closeModal(e) {
+            document.getElementById('modalOverlay').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Enable scrolling
+        }
+
+        // Close on Esc key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") closeModal();
+        });
+    </script>
+</body>
+</html>
