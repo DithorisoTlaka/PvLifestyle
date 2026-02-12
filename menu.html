@@ -9,7 +9,7 @@
    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* --- 1. DESIGN VARIABLES (Matches Home) --- */
+        /* --- 1. DESIGN VARIABLES --- */
         :root {
             --primary-gold: #C5A028;
             --dark-text: #1a1a1a;
@@ -17,13 +17,20 @@
             --bg-light: #ffffff;
             --bg-section: #f9f9f9;
             --footer-bg: #111111;
-            --glass-white: rgba(255, 255, 255, 0.85);
+            --glass-white: rgba(255, 255, 255, 0.8);
             --shadow: 0 10px 30px rgba(0,0,0,0.08);
             --radius-pill: 50px;
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-        /* --- 2. RESET & BASE --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        /* --- 2. BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-light);
@@ -31,9 +38,16 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-        a { text-decoration: none; color: inherit; }
-        /* --- 3. FLOATING GLASS NAVIGATION --- */
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+
+        /* --- 3. FLOATING GLASS NAVIGATION (PILL) --- */
         .nav-container {
             position: fixed;
             top: 25px;
@@ -52,96 +66,183 @@
             border: 1px solid rgba(255, 255, 255, 0.5);
             border-radius: var(--radius-pill);
             box-shadow: var(--shadow);
+            transition: var(--transition);
         }
-        .logo { font-size: 1.4rem; color: var(--dark-text); font-weight: 800; }
+
+        .logo {
+            font-size: 1.4rem;
+            color: var(--dark-text);
+            font-weight: 800;
+        }
         .logo span { color: var(--primary-gold); }
+
         .nav-links { display: flex; gap: 30px; }
-        .nav-links a { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-        .nav-links a:hover { color: var(--primary-gold); }
-        /* --- 4. HERO SECTION --- */
-        .menu-hero {
-            height: 40vh;
+        .nav-links a {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark-text);
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-gold); }
+
+        /* --- 4. PILL BUTTONS --- */
+        .btn-pill {
+            display: inline-block;
+            padding: 15px 40px;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+        .btn-gold {
+            background-color: var(--primary-gold);
+            color: white;
+            box-shadow: 0 10px 20px rgba(197, 160, 40, 0.2);
+        }
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(197, 160, 40, 0.3);
+            background-color: #b08d1e;
+        }
+
+        /* --- 5. PAGE HEADER (Small Hero) --- */
+        .page-header {
+            height: 50vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                        url('https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0018.jpg') center/cover no-repeat;
-            color: #fff;
-            padding-top: 60px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            margin-bottom: 50px;
         }
-        .menu-hero h1 { font-size: 3.5rem; letter-spacing: 2px; }
-        /* --- 5. MENU CARDS GRID --- */
-        .menu-container { padding: 100px 10%; background-color: var(--bg-light); }
-        .category-title { text-align: center; margin-bottom: 50px; font-size: 2.5rem; }
-        .category-title span { color: var(--primary-gold); display: block; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 10px; font-family: 'Montserrat'; font-weight: 700; }
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        .section-tag {
+            color: var(--primary-gold);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* --- 6. MENU GRID --- */
+        .menu-section {
+            padding: 50px 10% 120px;
+            background-color: var(--bg-light);
+        }
+        
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
             gap: 30px;
+            margin-top: 40px;
         }
-        .menu-card {
-            background: white;
-            border-radius: 25px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid #f0f0f0;
+
+        .menu-item {
             position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            cursor: zoom-in;
+            background: white;
         }
-        .menu-card:hover {
+
+        .menu-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
         }
-        .card-img { height: 250px; overflow: hidden; position: relative; }
-        .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
-        .menu-card:hover .card-img img { transform: scale(1.1); }
-        .card-body { padding: 25px; text-align: center; }
-        .card-body h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--dark-text); }
-        .card-price { color: var(--primary-gold); font-weight: 700; font-size: 1.1rem; }
-        /* --- 6. MODAL STYLES --- */
-        .modal-overlay {
+
+        .menu-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Overlay text on hover */
+        .menu-item::after {
+            content: 'Click to Expand';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.7);
+            color: var(--primary-gold);
+            padding: 10px 20px;
+            border-radius: 30px;
+            opacity: 0;
+            transition: 0.3s;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            pointer-events: none;
+        }
+
+        .menu-item:hover::after {
+            opacity: 1;
+        }
+
+        /* --- 7. LIGHTBOX (ZOOM) --- */
+        .lightbox {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
-            backdrop-filter: blur(8px);
-            z-index: 2000;
-            display: none; /* Hidden by default */
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 900px;
-            border-radius: 30px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            overflow: hidden;
-            position: relative;
-            animation: slideUp 0.4s ease;
+        
+        .lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
         }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 95vh;
+            border-radius: 5px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
         }
-        .modal-left { background-size: cover; background-position: center; min-height: 400px; }
-        .modal-right { padding: 60px 40px; display: flex; flex-direction: column; justify-content: center; position: relative; }
-       
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); }
-        .modal-right h2 { font-size: 2.5rem; margin-bottom: 15px; }
-        .modal-right p { color: var(--light-text); margin-bottom: 25px; line-height: 1.8; }
-        .modal-right .price { font-size: 2rem; color: var(--primary-gold); font-weight: 700; margin-bottom: 30px; display: block; }
-       
-        .btn-pill { padding: 15px 40px; border-radius: var(--radius-pill); background: var(--primary-gold); color: white; border: none; font-weight: 600; text-transform: uppercase; cursor: pointer; transition: var(--transition); }
-        .btn-pill:hover { background: #b08d1e; transform: scale(1.05); }
-        /* --- 7. FOOTER (Black) --- */
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: #fff;
+            font-size: 3rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .close-btn:hover { color: var(--primary-gold); }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* --- 8. FOOTER --- */
         footer {
             background-color: var(--footer-bg);
             color: #ffffff;
             padding: 100px 10% 40px;
+            font-size: 0.95rem;
         }
         .footer-grid {
             display: grid;
@@ -149,721 +250,206 @@
             gap: 60px;
             margin-bottom: 60px;
         }
-        .footer-col h4 { color: #fff; margin-bottom: 30px; position: relative; }
-        .footer-col h4::after { content: ''; position: absolute; left: 0; bottom: -10px; width: 30px; height: 2px; background: var(--primary-gold); }
-        .footer-col p { color: #aaa; margin-bottom: 20px; font-size: 0.9rem; }
-        .footer-bottom { border-top: 1px solid #222; padding-top: 40px; text-align: center; color: #666; font-size: 0.8rem; }
-        /* --- RESPONSIVE --- */
-        @media (max-width: 900px) {
-            .modal-content { grid-template-columns: 1fr; }
-            .modal-left { min-height: 250px; }
+        .footer-col h4 {
+            color: #fff;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -10px;
+            width: 30px; height: 2px;
+            background: var(--primary-gold);
+        }
+        .footer-col p { color: #aaa; margin-bottom: 20px; line-height: 1.8; }
+        .footer-links li { margin-bottom: 15px; }
+        .footer-links a { color: #aaa; }
+        .footer-links a:hover { color: var(--primary-gold); padding-left: 5px; }
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #aaa;
+        }
+        .contact-info i { color: var(--primary-gold); margin-top: 5px; }
+        .social-icons { display: flex; gap: 15px; margin-top: 25px; }
+        .social-icons a {
+            width: 40px; height: 40px;
+            background: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #fff;
+        }
+        .social-icons a:hover { background: var(--primary-gold); transform: translateY(-3px); }
+        .footer-bottom {
+            border-top: 1px solid #222;
+            padding-top: 40px;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- 9. RESPONSIVE --- */
+        @media (max-width: 1024px) {
             .footer-grid { grid-template-columns: 1fr 1fr; }
+            .menu-grid { grid-template-columns: 1fr; } 
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 2.5rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .menu-section { padding: 50px 5%; }
         }
     </style>
 </head>
 <body>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <img id="lightbox-img" src="" alt="Full Screen Menu">
+    </div>
+
     <header class="nav-container">
         <div class="logo">PV <span>LIFESTYLE</span></div>
         <nav class="nav-links">
             <a href="index.html">Home</a>
-            <a href="menu.html" style="color: var(--primary-gold);">Menu</a>
-            <a href="#">Gallery</a>
-            <a href="#">Contact</a>
+            <a href="index.html#about">About</a>
+            <a href="menu.html" class="active">Menu</a>
+            <a href="index.html#gallery">Gallery</a>
         </nav>
-        <button class="btn-pill" style="padding: 10px 25px; font-size: 0.75rem;">Book Table</button>
+        <a href="#contact" class="btn-pill btn-gold" style="padding: 10px 25px;">Reserve</a>
     </header>
-    <section class="menu-hero">
-        <h1>Our Menu</h1>
-    </section>
-    <section class="menu-container">
-        <div class="category-title">
-            <span>The Signature</span>
-            <h2>Dining Selection</h2>
+
+    <section class="page-header">
+        <div class="header-content">
+            <span class="section-tag">Taste the Tradition</span>
+            <h1 class="reveal">Our Menu</h1>
         </div>
+    </section>
+
+    <section class="menu-section">
+        <div style="text-align: center; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 15px;">Culinary Excellence</h2>
+            <p style="color: #666;">Explore our diverse selection of dishes, from traditional favorites to modern gourmet creations. Click on any menu page to view it in full detail.</p>
+        </div>
+
         <div class="menu-grid">
-            <div class="menu-card" onclick="openMenu('Grilled T-Bone', 'Succulent 500g T-Bone steak, flame-grilled with our signature basting, served with a choice of sides.', 'R 245.00', 'https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0021.jpg')">
-                <div class="card-img">
-                    <img src="https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0021.jpg" alt="T-Bone">
-                </div>
-                <div class="card-body">
-                    <h3>Grilled T-Bone</h3>
-                    <span class="card-price">R 245.00</span>
-                </div>
+            <div class="menu-item" onclick="openLightbox('Capture.jpg')">
+                <img src="Capture.jpg" alt="Wraps and Seafood Menu">
             </div>
-            <div class="menu-card" onclick="openMenu('Chillas Platter', 'A hearty selection of brisket, wings, and wors. Perfect for sharing with friends in the outside setting.', 'R 480.00', 'https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0014.jpg')">
-                <div class="card-img">
-                    <img src="https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0014.jpg" alt="Platter">
-                </div>
-                <div class="card-body">
-                    <h3>Chillas Platter</h3>
-                    <span class="card-price">R 480.00</span>
-                </div>
+
+            <div class="menu-item" onclick="openLightbox('Capture2.jpg')">
+                <img src="Capture2.jpg" alt="Platters Menu">
             </div>
-            <div class="menu-card" onclick="openMenu('Hennessy V.S.O.P', 'A sophisticated cognac with notes of fresh fruit and a gentle finish. Served neat or on ice.', 'R 1,450.00', 'https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0015.jpg')">
-                <div class="card-img">
-                    <img src="https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0015.jpg" alt="Hennessy">
-                </div>
-                <div class="card-body">
-                    <h3>Hennessy V.S.O.P</h3>
-                    <span class="card-price">R 1,450.00</span>
-                </div>
+
+            <div class="menu-item" onclick="openLightbox('Capture3.jpg')">
+                <img src="Capture3.jpg" alt="Pizza Menu">
             </div>
-            <div class="menu-card" onclick="openMenu('Beef Burger Deluxe', 'Homemade beef patty topped with caramelized onions, cheddar, and our secret sauce.', 'R 125.00', 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Burger">
-                </div>
-                <div class="card-body">
-                    <h3>Beef Burger Deluxe</h3>
-                    <span class="card-price">R 125.00</span>
-                </div>
+
+            <div class="menu-item" onclick="openLightbox('Capture4.jpg')">
+                <img src="Capture4.jpg" alt="Traditional Cuisine Menu">
+            </div>
+
+            <div class="menu-item" onclick="openLightbox('Capture5.jpg')">
+                <img src="Capture5.jpg" alt="Main Meals Menu">
+            </div>
+
+            <div class="menu-item" onclick="openLightbox('Capture6.jpg')">
+                <img src="Capture6.jpg" alt="Burgers Menu">
             </div>
         </div>
     </section>
-    <section class="menu-container">
-        <div class="category-title">
-            <span>The</span>
-            <h2>Platters</h2>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="openMenu('Cheese Platter', 'Cheddar, Mozzarella, crackers, feta, biltong. Served with chips or potato wedges.', 'R280.00', 'https://images.unsplash.com/photo-1626957341926-98752fc0594b?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1626957341926-98752fc0594b?auto=format&fit=crop&w=600&q=80" alt="Cheese Platter">
-                </div>
-                <div class="card-body">
-                    <h3>Cheese Platter</h3>
-                    <span class="card-price">R280.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Meat Platter', 'Wors, Chicken Strips, Wings, Beef biltong, Russians. Served with chips or potato wedges.', 'R180.00', 'https://images.unsplash.com/photo-1512132411229-c303a40d04b3?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1512132411229-c303a40d04b3?auto=format&fit=crop&w=600&q=80" alt="Meat Platter">
-                </div>
-                <div class="card-body">
-                    <h3>Meat Platter</h3>
-                    <span class="card-price">R180.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Snack Platter', 'Kebab, Biltong, Cheese, Russians. Served with chips or potato wedges.', 'R250.00', 'https://images.unsplash.com/photo-1606851130822-112b1969a3fc?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1606851130822-112b1969a3fc?auto=format&fit=crop&w=600&q=80" alt="Snack Platter">
-                </div>
-                <div class="card-body">
-                    <h3>Snack Platter</h3>
-                    <span class="card-price">R250.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Fruit Platter', 'PV Lifestyle fruits of the season. Served with chips or potato wedges.', 'R245.00', 'https://images.unsplash.com/photo-1601314002209-7e5a9f5c1e6e?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1601314002209-7e5a9f5c1e6e?auto=format&fit=crop&w=600&q=80" alt="Fruit Platter">
-                </div>
-                <div class="card-body">
-                    <h3>Fruit Platter</h3>
-                    <span class="card-price">R245.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Seafood Platter', 'Served with chips or potato wedges.', 'R320.00', 'https://images.unsplash.com/photo-1517336838609-4a4a7a1a7f74?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1517336838609-4a4a7a1a7f74?auto=format&fit=crop&w=600&q=80" alt="Seafood Platter">
-                </div>
-                <div class="card-body">
-                    <h3>Seafood Platter</h3>
-                    <span class="card-price">R320.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Kiddies Beef Cheese Burger & Chips', 'Including Small Juice Box. Special Beef Patty, Cheese, Tomato, Lettuce, Special Sauce.', 'R50.00', 'https://images.unsplash.com/photo-1603064752734-4c86ac6a5e0a?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1603064752734-4c86ac6a5e0a?auto=format&fit=crop&w=600&q=80" alt="Kiddies Beef Cheese Burger">
-                </div>
-                <div class="card-body">
-                    <h3>Kiddies Beef Cheese Burger & Chips</h3>
-                    <span class="card-price">R50.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Kiddies Chicken Cheese Burger & Chips', 'Including Small Juice Box. Grilled Chicken Filet, Cheese, Tomato, Lettuce, Special Sauce.', 'R50.00', 'https://images.unsplash.com/photo-1603064752734-4c86ac6a5e0a?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1603064752734-4c86ac6a5e0a?auto=format&fit=crop&w=600&q=80" alt="Kiddies Chicken Cheese Burger">
-                </div>
-                <div class="card-body">
-                    <h3>Kiddies Chicken Cheese Burger & Chips</h3>
-                    <span class="card-price">R50.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('6 Fried Fish Fingers And Chips', 'Including Small Juice Box.', 'R50.00', 'https://images.unsplash.com/photo-1570549719433-838e5171b5b9?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1570549719433-838e5171b5b9?auto=format&fit=crop&w=600&q=80" alt="Fried Fish Fingers">
-                </div>
-                <div class="card-body">
-                    <h3>6 Fried Fish Fingers And Chips</h3>
-                    <span class="card-price">R50.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('3 Beef Samosa And Chips', 'Including Small Juice Box.', 'R50.00', 'https://images.unsplash.com/photo-1565552817058-3100d7799466?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1565552817058-3100d7799466?auto=format&fit=crop&w=600&q=80" alt="Beef Samosa">
-                </div>
-                <div class="card-body">
-                    <h3>3 Beef Samosa And Chips</h3>
-                    <span class="card-price">R50.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Mac And Cheese', 'Including Small Juice Box.', 'R50.00', 'https://images.unsplash.com/photo-1621795875343-92de55d54943?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1621795875343-92de55d54943?auto=format&fit=crop&w=600&q=80" alt="Mac And Cheese">
-                </div>
-                <div class="card-body">
-                    <h3>Mac And Cheese</h3>
-                    <span class="card-price">R50.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Desserts Of The Day', 'Ask Waitron About Dessert or Cake of the Day.', 'R50.00', 'https://images.unsplash.com/photo-1551024609-42dbae24d327?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1551024609-42dbae24d327?auto=format&fit=crop&w=600&q=80" alt="Dessert">
-                </div>
-                <div class="card-body">
-                    <h3>Desserts Of The Day</h3>
-                    <span class="card-price">R50.00</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="menu-container">
-        <div class="category-title">
-            <span>The</span>
-            <h2>Pizza</h2>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="openMenu('Beef Pizza', 'Small R75.00, Medium R110.00, Large R130.00', 'Starting from R75.00', 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80" alt="Beef Pizza">
-                </div>
-                <div class="card-body">
-                    <h3>Beef Pizza</h3>
-                    <span class="card-price">Starting from R75.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Chicken Pizza', 'Small R65.00, Large R130.00', 'Starting from R65.00', 'https://foxeslovelemons.com/wp-content/uploads/2023/05/Chicken-Pizza-Ideas-Foxes-Love-Lemons.jpg')">
-                <div class="card-img">
-                    <img src="https://foxeslovelemons.com/wp-content/uploads/2023/05/Chicken-Pizza-Ideas-Foxes-Love-Lemons.jpg" alt="Chicken Pizza">
-                </div>
-                <div class="card-body">
-                    <h3>Chicken Pizza</h3>
-                    <span class="card-price">Starting from R65.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Meat Pizza', 'Small R110.00, Large R155.00', 'Starting from R110.00', 'https://images.unsplash.com/photo-1593560708920-61dd98c124d8?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1593560708920-61dd98c124d8?auto=format&fit=crop&w=600&q=80" alt="Meat Pizza">
-                </div>
-                <div class="card-body">
-                    <h3>Meat Pizza</h3>
-                    <span class="card-price">Starting from R110.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Seafood Pizza', 'Small R70.00, Medium R70.00, Large R130.00', 'Starting from R70.00', 'https://images.unsplash.com/photo-1618213837699-4d8b439e55b7?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1618213837699-4d8b439e55b7?auto=format&fit=crop&w=600&q=80" alt="Seafood Pizza">
-                </div>
-                <div class="card-body">
-                    <h3>Seafood Pizza</h3>
-                    <span class="card-price">Starting from R70.00</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="menu-container">
-        <div class="category-title">
-            <span>The</span>
-            <h2>Traditional Cuisine</h2>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="openMenu('Mogodu Beef', 'Served with 1 Starch of Your Choice and 2 Sides of Your Choice.', 'R155.00', 'https://i.ytimg.com/vi/PJ28BrZkGu4/maxresdefault.jpg')">
-                <div class="card-img">
-                    <img src="https://i.ytimg.com/vi/PJ28BrZkGu4/maxresdefault.jpg" alt="Mogodu Beef">
-                </div>
-                <div class="card-body">
-                    <h3>Mogodu Beef</h3>
-                    <span class="card-price">R155.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Mogodu Lamb', 'Served Only When Available. Served with 1 Starch of Your Choice and 2 Sides of Your Choice.', 'R155.00', 'https://images.unsplash.com/photo-1631516168381-4b5c5e4e5b0c?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1631516168381-4b5c5e4e5b0c?auto=format&fit=crop&w=600&q=80" alt="Mogodu Lamb">
-                </div>
-                <div class="card-body">
-                    <h3>Mogodu Lamb</h3>
-                    <span class="card-price">R155.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Beef Stew', 'Served with 1 Starch of Your Choice and 2 Sides of Your Choice.', 'R115.00', 'https://images.unsplash.com/photo-1606890658317-7d14490b76fd?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1606890658317-7d14490b76fd?auto=format&fit=crop&w=600&q=80" alt="Beef Stew">
-                </div>
-                <div class="card-body">
-                    <h3>Beef Stew</h3>
-                    <span class="card-price">R115.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Lamb Stew', 'Served with 1 Starch of Your Choice and 2 Sides of Your Choice.', 'R135.00', 'https://images.unsplash.com/photo-1569059761903-dfcd039b0670?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1569059761903-dfcd039b0670?auto=format&fit=crop&w=600&q=80" alt="Lamb Stew">
-                </div>
-                <div class="card-body">
-                    <h3>Lamb Stew</h3>
-                    <span class="card-price">R135.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Chicken Stew', 'Served with 1 Starch of Your Choice and 2 Sides of Your Choice.', 'R115.00', 'https://images.unsplash.com/photo-1604908177739-40a99e3a6ab4?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1604908177739-40a99e3a6ab4?auto=format&fit=crop&w=600&q=80" alt="Chicken Stew">
-                </div>
-                <div class="card-body">
-                    <h3>Chicken Stew</h3>
-                    <span class="card-price">R115.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Mogodu Goat', 'Served Only When Available. Served with 1 Starch of Your Choice and 2 Sides of Your Choice.', 'R155.00', 'https://images.unsplash.com/photo-1569059761903-dfcd039b0670?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1569059761903-dfcd039b0670?auto=format&fit=crop&w=600&q=80" alt="Mogodu Goat">
-                </div>
-                <div class="card-body">
-                    <h3>Mogodu Goat</h3>
-                    <span class="card-price">R155.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Hardbody Chicken', 'Served Only When Available. Served with 1 Starch of Your Choice and 2 Sides of Your Choice.', 'R155.00', 'https://images.unsplash.com/photo-1632712281467-058a7697c931?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1632712281467-058a7697c931?auto=format&fit=crop&w=600&q=80" alt="Hardbody Chicken">
-                </div>
-                <div class="card-body">
-                    <h3>Hardbody Chicken</h3>
-                    <span class="card-price">R155.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Pap', 'Extra.', 'R20.00', 'https://images.unsplash.com/photo-1614172023258-3a3b4e97d8a4?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1614172023258-3a3b4e97d8a4?auto=format&fit=crop&w=600&q=80" alt="Pap">
-                </div>
-                <div class="card-body">
-                    <h3>Pap</h3>
-                    <span class="card-price">R20.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Rice', 'Extra.', 'R20.00', 'https://images.unsplash.com/photo-1516684669134-de6f7c473a2a?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1516684669134-de6f7c473a2a?auto=format&fit=crop&w=600&q=80" alt="Rice">
-                </div>
-                <div class="card-body">
-                    <h3>Rice</h3>
-                    <span class="card-price">R20.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Samp', 'Extra.', 'R20.00', 'https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=600&q=80" alt="Samp">
-                </div>
-                <div class="card-body">
-                    <h3>Samp</h3>
-                    <span class="card-price">R20.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Mashed Potatoes', 'Extra.', 'R30.00', 'https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?auto=format&fit=crop&w=600&q=80" alt="Mashed Potatoes">
-                </div>
-                <div class="card-body">
-                    <h3>Mashed Potatoes</h3>
-                    <span class="card-price">R30.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Chakalaka', 'Side.', 'R35.00', 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" alt="Chakalaka">
-                </div>
-                <div class="card-body">
-                    <h3>Chakalaka</h3>
-                    <span class="card-price">R35.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Beetroot', 'Side.', 'R35.00', 'https://images.unsplash.com/photo-1618164435735-411d3b82d4f9?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1618164435735-411d3b82d4f9?auto=format&fit=crop&w=600&q=80" alt="Beetroot">
-                </div>
-                <div class="card-body">
-                    <h3>Beetroot</h3>
-                    <span class="card-price">R35.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Coleslaw', 'Side.', 'R30.00', 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80" alt="Coleslaw">
-                </div>
-                <div class="card-body">
-                    <h3>Coleslaw</h3>
-                    <span class="card-price">R30.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Butternut', 'Side.', 'R30.00', 'https://images.unsplash.com/photo-1585325700884-442d3d6e5f2f?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1585325700884-442d3d6e5f2f?auto=format&fit=crop&w=600&q=80" alt="Butternut">
-                </div>
-                <div class="card-body">
-                    <h3>Butternut</h3>
-                    <span class="card-price">R30.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Morogo', 'Side.', 'R35.00', 'https://images.unsplash.com/photo-1603048297172-4516775d6e2e?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1603048297172-4516775d6e2e?auto=format&fit=crop&w=600&q=80" alt="Morogo">
-                </div>
-                <div class="card-body">
-                    <h3>Morogo</h3>
-                    <span class="card-price">R35.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Creamy Spinach', 'Side.', 'R35.00', 'https://images.unsplash.com/photo-1612874598816-8b7a25a9495f?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1612874598816-8b7a25a9495f?auto=format&fit=crop&w=600&q=80" alt="Creamy Spinach">
-                </div>
-                <div class="card-body">
-                    <h3>Creamy Spinach</h3>
-                    <span class="card-price">R35.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Salad', 'Side.', 'R40.00', 'https://images.unsplash.com/photo-1512621770439-0c2663c6b81e?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1512621770439-0c2663c6b81e?auto=format&fit=crop&w=600&q=80" alt="Salad">
-                </div>
-                <div class="card-body">
-                    <h3>Salad</h3>
-                    <span class="card-price">R40.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Hardbody', 'Side.', 'R30.00', 'https://images.unsplash.com/photo-1557844352-7614bccdf7c1?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1557844352-7614bccdf7c1?auto=format&fit=crop&w=600&q=80" alt="Hardbody">
-                </div>
-                <div class="card-body">
-                    <h3>Hardbody</h3>
-                    <span class="card-price">R30.00</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="menu-container">
-        <div class="category-title">
-            <span>The</span>
-            <h2>Burgers</h2>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="openMenu('Beef Burger', 'Served with chips/potato wedges. Juicy Beef Patty lettuce, tomato, onion rings, chef\'s Special Sauce.', 'R75.00', 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Beef Burger">
-                </div>
-                <div class="card-body">
-                    <h3>Beef Burger</h3>
-                    <span class="card-price">R75.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('A Lifestyle Beef Cheese Burger', 'Served with chips/potato wedges. Special Beef Patty, cheese, lettuce, tomato, bacon.', 'R115.00', 'https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80" alt="Lifestyle Beef Cheese Burger">
-                </div>
-                <div class="card-body">
-                    <h3>A Lifestyle Beef Cheese Burger</h3>
-                    <span class="card-price">R115.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('PV Beef Cheese Burger', 'Served with chips/potato wedges. Double Grilled Beef Patty Double Cheese, Lettuce, Crispy.', 'R130.00', 'https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80" alt="PV Beef Cheese Burger">
-                </div>
-                <div class="card-body">
-                    <h3>PV Beef Cheese Burger</h3>
-                    <span class="card-price">R130.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Beef Cheese Burger', 'Served with chips/potato wedges. Grilled Patty, Cheese, Tomato, Lettuce, chef\'s Special Sauce.', 'R85.00', 'https://images.unsplash.com/photo-1551615593-ef2e48c4ce28?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1551615593-ef2e48c4ce28?auto=format&fit=crop&w=600&q=80" alt="Beef Cheese Burger">
-                </div>
-                <div class="card-body">
-                    <h3>Beef Cheese Burger</h3>
-                    <span class="card-price">R85.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Chicken Burger', 'Served with chips/potato wedges. BBQ Tendered Grilled Chicken Filet, Lettuce, Tomato, Onion Rings & Chef\'s Special Sauce.', 'R70.00', 'https://images.unsplash.com/photo-1562967916-eb818e469266?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1562967916-eb818e469266?auto=format&fit=crop&w=600&q=80" alt="Chicken Burger">
-                </div>
-                <div class="card-body">
-                    <h3>Chicken Burger</h3>
-                    <span class="card-price">R70.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Double Beef Patty 100g', 'PV Beef Extra.', 'R20.00', 'https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80" alt="Double Beef Patty">
-                </div>
-                <div class="card-body">
-                    <h3>Double Beef Patty 100g</h3>
-                    <span class="card-price">R20.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Extra Beef Patty 200g', 'PV Beef Extra.', 'R30.00', 'https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80" alt="Extra Beef Patty">
-                </div>
-                <div class="card-body">
-                    <h3>Extra Beef Patty 200g</h3>
-                    <span class="card-price">R30.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Extra Cheese', 'PV Beef Extra.', 'R20.00', 'https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80" alt="Extra Cheese">
-                </div>
-                <div class="card-body">
-                    <h3>Extra Cheese</h3>
-                    <span class="card-price">R20.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Extra Bacon (Crispy)', 'PV Beef Extra.', 'R20.00', 'https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1553979459-d2229ba1e4b5?auto=format&fit=crop&w=600&q=80" alt="Extra Bacon">
-                </div>
-                <div class="card-body">
-                    <h3>Extra Bacon (Crispy)</h3>
-                    <span class="card-price">R20.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Extra Onion Rings', 'PV Beef Extra.', 'R20.00', 'https://images.unsplash.com/photo-1630369160812-26fb3d0eb489?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1630369160812-26fb3d0eb489?auto=format&fit=crop&w=600&q=80" alt="Onion Rings">
-                </div>
-                <div class="card-body">
-                    <h3>Extra Onion Rings</h3>
-                    <span class="card-price">R20.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Chef\'s Special Sauce Small', 'PV Beef Extra.', 'R20.00', 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80" alt="Special Sauce">
-                </div>
-                <div class="card-body">
-                    <h3>Chef\'s Special Sauce Small</h3>
-                    <span class="card-price">R20.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Chef\'s Special Sauce Large', 'PV Beef Extra.', 'R30.00', 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=600&q=80" alt="Special Sauce">
-                </div>
-                <div class="card-body">
-                    <h3>Chef\'s Special Sauce Large</h3>
-                    <span class="card-price">R30.00</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="menu-container">
-        <div class="category-title">
-            <span>The</span>
-            <h2>Main Meal</h2>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="openMenu('Pork Chops', 'All Our Chops are served with one of the Following Ring, Chips, Mashed Potatoes, Potato Wedges, Onion Rings. 2 For R70.00, 4 For R130.00.', 'Starting from R70.00', 'https://images.unsplash.com/photo-1432139509613-5c4255815697?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?auto=format&fit=crop&w=600&q=80" alt="Pork Chops">
-                </div>
-                <div class="card-body">
-                    <h3>Pork Chops</h3>
-                    <span class="card-price">Starting from R70.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Lamb Chops', 'All Our Chops are served with one of the Following Ring, Chips, Mashed Potatoes, Potato Wedges, Onion Rings. 2 For R80.00, 4 For R145.00, 6 For R190.00.', 'Starting from R80.00', 'https://images.unsplash.com/photo-1432139509613-5c4255815697?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?auto=format&fit=crop&w=600&q=80" alt="Lamb Chops">
-                </div>
-                <div class="card-body">
-                    <h3>Lamb Chops</h3>
-                    <span class="card-price">Starting from R80.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('T-Bone Steak', '300g With Topping R160.00, 500g With Topping R195.00, Without Topping R175.00.', 'Starting from R160.00', 'https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0021.jpg')">
-                <div class="card-img">
-                    <img src="https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0021.jpg" alt="T-Bone">
-                </div>
-                <div class="card-body">
-                    <h3>T-Bone Steak</h3>
-                    <span class="card-price">Starting from R160.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Grilled Chicken Wings', '6 R85.00, 12 R205.00, 18 R285.00.', 'Starting from R85.00', 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6d4?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6d4?auto=format&fit=crop&w=600&q=80" alt="Chicken Wings">
-                </div>
-                <div class="card-body">
-                    <h3>Grilled Chicken Wings</h3>
-                    <span class="card-price">Starting from R85.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Jalapeno Sauce', 'Steaks Topping.', 'R35.00', 'https://images.unsplash.com/photo-1478749485505-2a90d8bf1f07?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1478749485505-2a90d8bf1f07?auto=format&fit=crop&w=600&q=80" alt="Jalapeno Sauce">
-                </div>
-                <div class="card-body">
-                    <h3>Jalapeno Sauce</h3>
-                    <span class="card-price">R35.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Mushroom Sauce', 'Steaks Topping.', 'R35.00', 'https://images.unsplash.com/photo-1594058573823-d8edf1ad0ce7?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1594058573823-d8edf1ad0ce7?auto=format&fit=crop&w=600&q=80" alt="Mushroom Sauce">
-                </div>
-                <div class="card-body">
-                    <h3>Mushroom Sauce</h3>
-                    <span class="card-price">R35.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Garlic Cheese Sauce', 'Steaks Topping.', 'R35.00', 'https://images.unsplash.com/photo-1551881235-1c5c133b158c?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1551881235-1c5c133b158c?auto=format&fit=crop&w=600&q=80" alt="Garlic Cheese Sauce">
-                </div>
-                <div class="card-body">
-                    <h3>Garlic Cheese Sauce</h3>
-                    <span class="card-price">R35.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Cheese Creamy And Cheesy Sauce', 'Steaks Topping.', 'R35.00', 'https://images.unsplash.com/photo-1551881235-1c5c133b158c?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1551881235-1c5c133b158c?auto=format&fit=crop&w=600&q=80" alt="Cheese Creamy Sauce">
-                </div>
-                <div class="card-body">
-                    <h3>Cheese Creamy And Cheesy Sauce</h3>
-                    <span class="card-price">R35.00</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="menu-container">
-        <div class="category-title">
-            <span>The</span>
-            <h2>Wraps and Seafood</h2>
-        </div>
-        <div class="menu-grid">
-            <div class="menu-card" onclick="openMenu('Grilled Chicken Wrap', 'Served with one of the Following: Onion, Potato Wedges, Chips or Salad. Served With Extra Sauce.', 'R110.00', 'https://www.perdue.com/sites/default/files/styles/recipe_hero_banner/public/grilled_chicken_arugula_salad_wrap_tada.jpg?h=ddb1ad0c&itok=IGRlvPYM')">
-                <div class="card-img">
-                    <img src="https://www.perdue.com/sites/default/files/styles/recipe_hero_banner/public/grilled_chicken_arugula_salad_wrap_tada.jpg?h=ddb1ad0c&itok=IGRlvPYM" alt="Grilled Chicken Wrap">
-                </div>
-                <div class="card-body">
-                    <h3>Grilled Chicken Wrap</h3>
-                    <span class="card-price">R110.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Grilled Beef Wrap', 'Served with one of the Following: Onion, Potato Wedges, Chips or Salad. Served With Extra Sauce.', 'R130.00', 'https://images.unsplash.com/photo-1606890658317-7d14490b76fd?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1606890658317-7d14490b76fd?auto=format&fit=crop&w=600&q=80" alt="Grilled Beef Wrap">
-                </div>
-                <div class="card-body">
-                    <h3>Grilled Beef Wrap</h3>
-                    <span class="card-price">R130.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Pan Fried Beef Wrap Mince', 'Served with one of the Following: Onion, Potato Wedges, Chips or Salad.', 'R135.00', 'https://images.unsplash.com/photo-1632331473883-4a7a7e7c5a51?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1632331473883-4a7a7e7c5a51?auto=format&fit=crop&w=600&q=80" alt="Pan Fried Beef Wrap Mince">
-                </div>
-                <div class="card-body">
-                    <h3>Pan Fried Beef Wrap Mince</h3>
-                    <span class="card-price">R135.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Small Buttered Hake', 'With tartar sauce, potato wedges, chips or rings.', 'R55.00', 'https://i.ytimg.com/vi/6G8-d8KNna0/sddefault.jpg')">
-                <div class="card-img">
-                    <img src="https://i.ytimg.com/vi/6G8-d8KNna0/sddefault.jpg" alt="Small Buttered Hake">
-                </div>
-                <div class="card-body">
-                    <h3>Small Buttered Hake</h3>
-                    <span class="card-price">R55.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Large Buttered Hake', 'With tartar sauce.', 'R75.00', 'https://images.unsplash.com/photo-1569261464659-2b8a5a5dc3cc?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1569261464659-2b8a5a5dc3cc?auto=format&fit=crop&w=600&q=80" alt="Large Buttered Hake">
-                </div>
-                <div class="card-body">
-                    <h3>Large Buttered Hake</h3>
-                    <span class="card-price">R75.00</span>
-                </div>
-            </div>
-            <div class="menu-card" onclick="openMenu('Large Deep Fried Hake', 'With tartar sauce.', 'R75.00', 'https://images.unsplash.com/photo-1630174610331-98e8010e0a5a?auto=format&fit=crop&w=600&q=80')">
-                <div class="card-img">
-                    <img src="https://images.unsplash.com/photo-1630174610331-98e8010e0a5a?auto=format&fit=crop&w=600&q=80" alt="Large Deep Fried Hake">
-                </div>
-                <div class="card-body">
-                    <h3>Large Deep Fried Hake</h3>
-                    <span class="card-price">R75.00</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="modal-overlay" id="menuModal" onclick="closeMenu()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeMenu()">&times;</span>
-            <div class="modal-left" id="modalImg"></div>
-            <div class="modal-right">
-                <h2 id="modalName">Item Name</h2>
-                <p id="modalDesc">This is a description of the delicious meal offered at PV Lifestyle.</p>
-                <span class="price" id="modalPrice">R 00.00</span>
-                <button class="btn-pill">Order Now</button>
-            </div>
-        </div>
-    </div>
-    <footer>
+
+    <footer id="contact">
         <div class="footer-grid">
             <div class="footer-col">
                 <div class="logo" style="color: #fff; margin-bottom: 25px;">PV <span>LIFESTYLE</span></div>
-                <p>Mokopane's premier fine dining destination. Experience luxury in every bite and every sip.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Explore</h4>
-                <div class="footer-links">
-                    <a href="index.html" style="color: #aaa; display: block; margin-bottom: 10px;">Home</a>
-                    <a href="#" style="color: #aaa; display: block; margin-bottom: 10px;">Our Menu</a>
-                    <a href="#" style="color: #aaa; display: block; margin-bottom: 10px;">Gallery</a>
+                <p>Elevating the standard of fine dining in Mokopane. We combine culinary excellence with a sophisticated atmosphere to create moments that last a lifetime.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
             <div class="footer-col">
-                <h4>Visit Us</h4>
-                <p>67 Van Heerden Str.<br>Mokopane, 0600</p>
-                <p>015 000 6300</p>
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="menu.html">Our Menu</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
             </div>
             <div class="footer-col">
-                <h4>Hours</h4>
-                <p>Mon - Sun<br>10:00 AM - 02:00 AM</p>
+                <h4>Contact Us</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i> 67 Van Heerden Str. Mokopane, 0600</li>
+                    <li><i class="fas fa-phone"></i> 015 000 6300</li>
+                    <li><i class="fas fa-envelope"></i> info@pvlifestyle.co.za</li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <p>Subscribe to receive updates on exclusive events and new menu items.</p>
+                <div style="display: flex; gap: 10px;">
+                    <input type="email" placeholder="Email Address" style="padding: 12px 20px; border-radius: 25px; border: none; background: #222; color: #fff; width: 100%;">
+                    <button class="btn-gold" style="padding: 12px 20px; border-radius: 25px; border: none; cursor: pointer;"><i class="fas fa-paper-plane"></i></button>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 PV Lifestyle. Designed by Ituzatech.</p>
+            <p>&copy; 2026 PV Lifestyle Restaurant & Bar. All Rights Reserved. | Designed by Ituzatech.</p>
         </div>
     </footer>
+
     <script>
-        function openMenu(name, desc, price, img) {
-            document.getElementById('modalName').innerText = name;
-            document.getElementById('modalDesc').innerText = desc;
-            document.getElementById('modalPrice').innerText = price;
-            document.getElementById('modalImg').style.backgroundImage = `url('${img}')`;
-           
-            document.getElementById('menuModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Disable scroll
+        // Reveal Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Nav Scroll Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.nav-container');
+            if (window.scrollY > 50) {
+                nav.style.background = "rgba(255, 255, 255, 0.95)";
+                nav.style.padding = "10px 30px";
+            } else {
+                nav.style.background = "rgba(255, 255, 255, 0.8)";
+                nav.style.padding = "12px 35px";
+            }
+        });
+
+        // Lightbox Functions
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
         }
-        function closeMenu() {
-            document.getElementById('menuModal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Enable scroll
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
         }
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") closeMenu();
+
+        // Close lightbox when clicking outside image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target !== lightboxImg) {
+                closeLightbox();
+            }
         });
     </script>
 </body>
