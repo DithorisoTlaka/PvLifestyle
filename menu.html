@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Menu | PV Lifestyle</title>
-    
+   
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
-    
+   
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
         /* --- 1. DESIGN VARIABLES (Matches Home) --- */
         :root {
@@ -23,7 +22,6 @@
             --radius-pill: 50px;
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-
         /* --- 2. RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         body {
@@ -35,7 +33,6 @@
         }
         h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
         a { text-decoration: none; color: inherit; }
-
         /* --- 3. FLOATING GLASS NAVIGATION --- */
         .nav-container {
             position: fixed;
@@ -61,7 +58,6 @@
         .nav-links { display: flex; gap: 30px; }
         .nav-links a { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         .nav-links a:hover { color: var(--primary-gold); }
-
         /* --- 4. HERO SECTION --- */
         .menu-hero {
             height: 40vh;
@@ -69,24 +65,21 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
                         url('https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0018.jpg') center/cover no-repeat;
             color: #fff;
             padding-top: 60px;
         }
         .menu-hero h1 { font-size: 3.5rem; letter-spacing: 2px; }
-
         /* --- 5. MENU CARDS GRID --- */
         .menu-container { padding: 100px 10%; background-color: var(--bg-light); }
         .category-title { text-align: center; margin-bottom: 50px; font-size: 2.5rem; }
         .category-title span { color: var(--primary-gold); display: block; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 5px; margin-bottom: 10px; font-family: 'Montserrat'; font-weight: 700; }
-
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
-
         .menu-card {
             background: white;
             border-radius: 25px;
@@ -97,20 +90,16 @@
             border: 1px solid #f0f0f0;
             position: relative;
         }
-
         .menu-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
-
         .card-img { height: 250px; overflow: hidden; position: relative; }
         .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s ease; }
         .menu-card:hover .card-img img { transform: scale(1.1); }
-
         .card-body { padding: 25px; text-align: center; }
         .card-body h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--dark-text); }
         .card-price { color: var(--primary-gold); font-weight: 700; font-size: 1.1rem; }
-
         /* --- 6. MODAL STYLES --- */
         .modal-overlay {
             position: fixed;
@@ -123,7 +112,6 @@
             align-items: center;
             padding: 20px;
         }
-
         .modal-content {
             background: white;
             width: 100%;
@@ -135,23 +123,20 @@
             position: relative;
             animation: slideUp 0.4s ease;
         }
-
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .modal-left { background-size: cover; background-position: center; min-height: 400px; }
         .modal-right { padding: 60px 40px; display: flex; flex-direction: column; justify-content: center; position: relative; }
-        
+       
         .close-btn { position: absolute; top: 20px; right: 25px; font-size: 1.5rem; cursor: pointer; color: var(--dark-text); }
         .modal-right h2 { font-size: 2.5rem; margin-bottom: 15px; }
         .modal-right p { color: var(--light-text); margin-bottom: 25px; line-height: 1.8; }
         .modal-right .price { font-size: 2rem; color: var(--primary-gold); font-weight: 700; margin-bottom: 30px; display: block; }
-        
+       
         .btn-pill { padding: 15px 40px; border-radius: var(--radius-pill); background: var(--primary-gold); color: white; border: none; font-weight: 600; text-transform: uppercase; cursor: pointer; transition: var(--transition); }
         .btn-pill:hover { background: #b08d1e; transform: scale(1.05); }
-
         /* --- 7. FOOTER (Black) --- */
         footer {
             background-color: var(--footer-bg);
@@ -168,7 +153,6 @@
         .footer-col h4::after { content: ''; position: absolute; left: 0; bottom: -10px; width: 30px; height: 2px; background: var(--primary-gold); }
         .footer-col p { color: #aaa; margin-bottom: 20px; font-size: 0.9rem; }
         .footer-bottom { border-top: 1px solid #222; padding-top: 40px; text-align: center; color: #666; font-size: 0.8rem; }
-
         /* --- RESPONSIVE --- */
         @media (max-width: 900px) {
             .modal-content { grid-template-columns: 1fr; }
@@ -178,7 +162,6 @@
     </style>
 </head>
 <body>
-
     <header class="nav-container">
         <div class="logo">PV <span>LIFESTYLE</span></div>
         <nav class="nav-links">
@@ -189,17 +172,14 @@
         </nav>
         <button class="btn-pill" style="padding: 10px 25px; font-size: 0.75rem;">Book Table</button>
     </header>
-
     <section class="menu-hero">
         <h1>Our Menu</h1>
     </section>
-
     <section class="menu-container">
         <div class="category-title">
             <span>The Signature</span>
             <h2>Dining Selection</h2>
         </div>
-
         <div class="menu-grid">
             <div class="menu-card" onclick="openMenu('Grilled T-Bone', 'Succulent 500g T-Bone steak, flame-grilled with our signature basting, served with a choice of sides.', 'R 245.00', 'https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0021.jpg')">
                 <div class="card-img">
@@ -210,7 +190,6 @@
                     <span class="card-price">R 245.00</span>
                 </div>
             </div>
-
             <div class="menu-card" onclick="openMenu('Chillas Platter', 'A hearty selection of brisket, wings, and wors. Perfect for sharing with friends in the outside setting.', 'R 480.00', 'https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0014.jpg')">
                 <div class="card-img">
                     <img src="https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0014.jpg" alt="Platter">
@@ -220,7 +199,6 @@
                     <span class="card-price">R 480.00</span>
                 </div>
             </div>
-
             <div class="menu-card" onclick="openMenu('Hennessy V.S.O.P', 'A sophisticated cognac with notes of fresh fruit and a gentle finish. Served neat or on ice.', 'R 1,450.00', 'https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0015.jpg')">
                 <div class="card-img">
                     <img src="https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0015.jpg" alt="Hennessy">
@@ -230,7 +208,6 @@
                     <span class="card-price">R 1,450.00</span>
                 </div>
             </div>
-
             <div class="menu-card" onclick="openMenu('Beef Burger Deluxe', 'Homemade beef patty topped with caramelized onions, cheddar, and our secret sauce.', 'R 125.00', 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80')">
                 <div class="card-img">
                     <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Burger">
@@ -242,7 +219,117 @@
             </div>
         </div>
     </section>
-
+    <section class="menu-container">
+        <div class="category-title">
+            <span>The</span>
+            <h2>Platters</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openMenu('Chillas Platter', 'A hearty selection of brisket, wings, and wors. Perfect for sharing with friends in the outside setting.', 'R 480.00', 'https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0014.jpg')">
+                <div class="card-img">
+                    <img src="https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0014.jpg" alt="Platter">
+                </div>
+                <div class="card-body">
+                    <h3>Chillas Platter</h3>
+                    <span class="card-price">R 480.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="menu-container">
+        <div class="category-title">
+            <span>The</span>
+            <h2>Pizza</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openMenu('Chicken Pizza', 'Delicious chicken pizza', 'R 95.00', 'https://foxeslovelemons.com/wp-content/uploads/2023/05/Chicken-Pizza-Ideas-Foxes-Love-Lemons.jpg')">
+                <div class="card-img">
+                    <img src="https://foxeslovelemons.com/wp-content/uploads/2023/05/Chicken-Pizza-Ideas-Foxes-Love-Lemons.jpg" alt="Chicken Pizza">
+                </div>
+                <div class="card-body">
+                    <h3>Chicken Pizza</h3>
+                    <span class="card-price">R 95.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="menu-container">
+        <div class="category-title">
+            <span>The</span>
+            <h2>Traditional Cuisine</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openMenu('Mogodu Beef', 'Served With 1 Starch Of Your Choice and 2 Sides Of Your Choice', 'R 155.00', 'https://i.ytimg.com/vi/PJ28BrZkGu4/maxresdefault.jpg')">
+                <div class="card-img">
+                    <img src="https://i.ytimg.com/vi/PJ28BrZkGu4/maxresdefault.jpg" alt="Mogodu Beef">
+                </div>
+                <div class="card-body">
+                    <h3>Mogodu Beef</h3>
+                    <span class="card-price">R 155.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="menu-container">
+        <div class="category-title">
+            <span>The</span>
+            <h2>Burgers</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openMenu('Beef Burger Deluxe', 'Homemade beef patty topped with caramelized onions, cheddar, and our secret sauce.', 'R 125.00', 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80')">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Burger">
+                </div>
+                <div class="card-body">
+                    <h3>Beef Burger Deluxe</h3>
+                    <span class="card-price">R 125.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="menu-container">
+        <div class="category-title">
+            <span>The</span>
+            <h2>Main Meal</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openMenu('Grilled T-Bone', 'Succulent 500g T-Bone steak, flame-grilled with our signature basting, served with a choice of sides.', 'R 245.00', 'https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0021.jpg')">
+                <div class="card-img">
+                    <img src="https://pvlifestyle.co.za/wp-content/uploads/2022/12/IMG-20221213-WA0021.jpg" alt="T-Bone">
+                </div>
+                <div class="card-body">
+                    <h3>Grilled T-Bone</h3>
+                    <span class="card-price">R 245.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="menu-container">
+        <div class="category-title">
+            <span>The</span>
+            <h2>Wraps and Seafood</h2>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-card" onclick="openMenu('Grilled Chicken Wrap', 'Served With Extra Sauce', 'R 110.00', 'https://www.perdue.com/sites/default/files/styles/recipe_hero_banner/public/grilled_chicken_arugula_salad_wrap_tada.jpg?h=ddb1ad0c&itok=IGRlvPYM')">
+                <div class="card-img">
+                    <img src="https://www.perdue.com/sites/default/files/styles/recipe_hero_banner/public/grilled_chicken_arugula_salad_wrap_tada.jpg?h=ddb1ad0c&itok=IGRlvPYM" alt="Grilled Chicken Wrap">
+                </div>
+                <div class="card-body">
+                    <h3>Grilled Chicken Wrap</h3>
+                    <span class="card-price">R 110.00</span>
+                </div>
+            </div>
+            <div class="menu-card" onclick="openMenu('Small Buttered Hake', 'With tartar sauce', 'R 55.00', 'https://i.ytimg.com/vi/6G8-d8KNna0/sddefault.jpg')">
+                <div class="card-img">
+                    <img src="https://i.ytimg.com/vi/6G8-d8KNna0/sddefault.jpg" alt="Small Buttered Hake">
+                </div>
+                <div class="card-body">
+                    <h3>Small Buttered Hake</h3>
+                    <span class="card-price">R 55.00</span>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="modal-overlay" id="menuModal" onclick="closeMenu()">
         <div class="modal-content" onclick="event.stopPropagation()">
             <span class="close-btn" onclick="closeMenu()">&times;</span>
@@ -255,7 +342,6 @@
             </div>
         </div>
     </div>
-
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
@@ -284,23 +370,20 @@
             <p>&copy; 2026 PV Lifestyle. Designed by Ituzatech.</p>
         </div>
     </footer>
-
     <script>
         function openMenu(name, desc, price, img) {
             document.getElementById('modalName').innerText = name;
             document.getElementById('modalDesc').innerText = desc;
             document.getElementById('modalPrice').innerText = price;
             document.getElementById('modalImg').style.backgroundImage = `url('${img}')`;
-            
+           
             document.getElementById('menuModal').style.display = 'flex';
             document.body.style.overflow = 'hidden'; // Disable scroll
         }
-
         function closeMenu() {
             document.getElementById('menuModal').style.display = 'none';
             document.body.style.overflow = 'auto'; // Enable scroll
         }
-
         // Close on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === "Escape") closeMenu();
